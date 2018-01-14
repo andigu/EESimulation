@@ -19,29 +19,37 @@ def draw_triangles(t1: turtle.Turtle):
 
 def start(t: turtle.Turtle, position, angle):
     if angle == math.pi / 2:
-        draw_line(t, position, 400, position, main.y(position))
+        draw_line(t, position, main.height, position, main.y(position))
     else:
-        draw_line(t, 1 / math.tan(angle) * 100, 400, position, main.y(position))
+        draw_line(t, position + 1 / math.tan(angle) * (main.height - main.y(position)), main.height, position,
+                  main.y(position))
     index = 0
     while not math.isnan(position) and not math.isnan(angle):
         position, angle = main.exit_status(position, angle) if index % 2 == 0 else main.enter_status(position, angle)
-        print(position, angle)
         if not math.isnan(position) and not math.isnan(angle):
             t.goto(position + main.base * int((index + 1) / 2), main.y(position))
             index += 1
-        else:
-            print("quit")
+    return int(index / 2) + 1
 
 
 ttl = turtle.Turtle()
+ttl.hideturtle()
 s = turtle.Screen()
 s.screensize(2000, 2000)
 ttl.speed(100)
 draw_triangles(ttl)
-for i in range(10):
-    ttl.color("#FFC107")
-    start(ttl, main.base * 0.05 * i, math.pi / 2)
-    ttl.color("black")
-    ttl.write(i, font=("Arial", 16, "bold"))
 
+
+def vary(get_x, get_angle, rng):
+    for i in range(1, rng):
+        ttl.color("#FFC107")
+        params = (get_x(i, rng), get_angle(i, rng))
+    # if params[1] < (math.pi - main.theta):
+        entered_count = start(ttl, params[0], params[1])
+        print(entered_count, params)
+        ttl.color("black")
+        ttl.write(i, font=("Arial", 16, "bold"))
+
+
+vary(lambda x, y: main.base * 0.1, lambda x, y: math.pi / 2 + math.pi / 2 * x / y, 30)
 s.exitonclick()

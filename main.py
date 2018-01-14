@@ -21,9 +21,7 @@ def exit_status(enter_x, enter_angle):
     a, b = math.pi / 2 - theta + s, math.pi - theta
     c = math.pi - a - b
     l1 = (base - 2 * enter_x) / math.sin(c) * math.sin(a) + length(base/2 - enter_x, height - y(enter_x))
-    print((base - 2 * enter_x) / math.sin(c) * math.sin(a), length(base/2 - enter_x, height - y(enter_x)), L)
     ratio = (L - l1)/L
-    print(base - ratio * base/2)
     return base - ratio * base/2, theta - s - math.pi / 2
 
 
@@ -37,6 +35,6 @@ def enter_status(exit_x, exit_angle):
 
 
 # height = 200, 400 works well
-base, height, n_air, n_acrylic = 100, 200, 1, 1.49
+base, height, n_air, n_acrylic = 100, 1000, 1, 1.49
 theta = math.atan2(height, base / 2)
 L = length(base / 2, height)
