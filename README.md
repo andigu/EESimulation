@@ -1,5 +1,5 @@
-#Simulation of the Path of a Photon
-
+Simulation of the Path of a Photon
+---
 Created from an idealized model of a surface, with the following assumptions:
 * Light enters the cover layer at every angle with equal intensity
 * The surface is composed entirely of a grid of identical right cones with a base diameter b and a height h. This 
